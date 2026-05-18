@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RuNi Design & Research | 個人作品集</title>
+    
+    <link rel="icon" href="LOGO.png" type="image/png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-blue: #809BC4;
+            --color-purple: #B9B0D6;
+            --color-pink: #F5CFE9;
+            --color-light-blue: #DCEAF9;
+            --color-white: #EDF3F9;
+        }
+        
+       
+        html, body, a, button, img, .cursor-zoom-in {
+            cursor: none !important;
+        }
+
+        body { 
+            font-family: 'Noto Serif TC', serif; 
+            background: linear-gradient(135deg, var(--color-white) 0%, var(--color-light-blue) 100%);
+            color: #1f2937; 
+            scroll-behavior: smooth; 
+            overflow-x: hidden;
+            font-weight: 300; 
+        }
+        h1, h2, h3, .serif-bold { font-weight: 900; } 
+        
+        .bg-text { 
+            position: absolute; font-size: 20vw; font-weight: 900; 
+            color: white; z-index: 0; pointer-events: none; opacity: 0.8; line-height: 1;
+        }
+
+        #custom-cursor {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--color-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: multiply; 
+            transition: width 0.4s ease, height 0.4s ease, background-color 0.4s ease, transform 0.15s ease-out;
+            transform: translate(-50%, -50%);
+        }
+
+        
+        body.is-hovering #custom-cursor {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(245, 207, 233, 0.4); 
+            border: 1px solid var(--color-pink);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(30px) saturate(140%);
+            -webkit-backdrop-filter: blur(30px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 45px rgba(128, 155, 196, 0.12);
+        }
+        
+        .glass-panel h2 { color: #111827; }
+        .glass-panel p { color: #1f2937; font-weight: 400; line-height: 2; }
+
+        .float-card { 
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s; 
+            filter: drop-shadow(0 15px 25px rgba(128,155,196,0.1));
+        }
+        .float-card:hover { 
+            transform: translateY(-12px) rotate(0.5deg);
+            filter: drop-shadow(0 35px 50px rgba(185,176,214,0.3));
+        }
+
+        .cursor-particle {
+            position: fixed; z-index: 9998; pointer-events: none;
+            width: 4px; height: 4px; border-radius: 50%;
+            opacity: 0.5; transform: scale(0); animation: particleFade 1s ease-out forwards;
+        }
+        @keyframes particleFade {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(0) translate(15px, 15px); opacity: 0; }
+        }
+
+        .lightbox-overlay {
+            display: none; position: fixed; z-index: 10000; inset: 0;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px);
+            justify-content: center; align-items: center; cursor: none !important;
+        }
+        .lightbox-overlay img {
+            max-width: 90%; max-height: 90%;
+            border: 15px solid white; border-radius: 1.5rem;
+            box-shadow: 0 50px 100px rgba(128, 155, 196, 0.2);
+        }
+        .fade-in { animation: fadeIn 2s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div id="custom-cursor"></div>
+
+    <div id="lightbox-overlay" class="lightbox-overlay" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Zoomed Image">
+    </div>
+
+    <nav class="fixed w-full z-50 p-6 flex justify-between items-center bg-white/10 backdrop-blur-xl border-b border-white/40">
+        <div class="text-3xl serif-bold tracking-tighter" style="color: var(--color-blue);">R.</div>
+        <div class="space-x-8 text-[11px] tracking-[0.4em] font-bold">
+            <a href="#work" class="hover:text-[#B9B0D6] transition uppercase">WORKS</a>
+            <a href="#about" class="hover:text-[#B9B0D6] transition uppercase">ABOUT</a>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex items-center justify-center relative px-6 overflow-hidden">
+        <div class="bg-text serif -top-10 -left-10">DESIGN</div>
+        <div class="max-w-7xl mx-auto w-full relative z-10 text-center md:text-left grid md:grid-cols-12 items-center gap-10">
+            <div class="md:col-span-12 fade-in relative">
+                <div class="absolute -top-16 -left-16 w-64 h-64 rounded-full bg-[#F5CFE9] blur-2xl opacity-40 z-0"></div>
+                <span class="text-xs font-black tracking-[0.6em] text-[#809BC4] uppercase mb-4 block serif-bold">二零二六 ‧ 夏 ‧ 設計紀錄</span>
+                <h1 class="text-7xl md:text-[10rem] serif-bold font-black leading-none mb-10 relative z-10" style="color: var(--color-blue);">
+                    RuNi<br><span class="text-5xl md:text-8xl text-[#B9B0D6] font-light md:ml-48">// Portfolio</span>
+                </h1>
+                <div class="w-24 h-[1px] bg-[#B9B0D6]/50 mb-10 mx-auto md:mx-0"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="py-20 relative px-6 md:px-24">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-64 relative group">
+                <div class="md:flex items-center">
+                    <div class="md:w-3/5 relative">
+                        <div class="absolute -inset-4 bg-[#DCEAF9] rounded-3xl -z-10 transform rotate-1 blur-sm opacity-60"></div>
+                        <img src="島嶼地息-封面.jpg" class="w-full rounded-2xl shadow-2xl float-card cursor-zoom-in" onclick="openLightbox(this)" alt="島嶼地息封面">
+                    </div>
+                    <div class="md:w-2/5 md:-ml-16 z-20 mt-12 md:mt-0">
+                        <div class="glass-panel p-10 md:p-14 rounded-3xl border-t-8" style="border-color: var(--color-blue);">
+                            <span class="text-[10px] serif-bold text-[#809BC4] tracking-[0.5em] uppercase">Project</span>
+                            <h2 class="text-4xl serif-bold mt-4 mb-6 leading-tight">島嶼地息</h2>
+                            <p class="text-sm leading-8 mb-8 max-w-sm">
+                               以台灣土壤多樣性為核心的感官計畫。台灣有世界 12 類土綱中的 11 種，就像是「微型土壤博物館」。
+                               在此項目負責網頁設計、線香包裝設計、刀模繪製、社群媒體經營。
+                            </p>
+                            <a href="https://thescentofformosa.github.io/The-Scent-of-Formosa/" target="_blank" class="text-[10px] font-bold tracking-widest border-b-2 border-[#B9B0D6] pb-1 hover:text-[#B9B0D6] transition uppercase">線上官網</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-64 py-24 relative">
+                <div class="max-w-6xl mx-auto relative">
+                    <div class="absolute -top-20 right-0 w-32 md:w-48 z-30 float-card">
+                        <img src="C2A HONORABLE MENTION.png" alt="C2A Creative Communication Award 2025" class="rounded-xl shadow-lg border-4 border-white cursor-zoom-in" onclick="openLightbox(this)">
+                    </div>
+
+                    <h2 class="text-6xl md:text-8xl serif-bold text-center mb-24 text-[#B9B0D6] font-black opacity-80 leading-none">藥引女子</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                        <div class="md:col-span-7 shadow-2xl rounded-3xl overflow-hidden float-card cursor-zoom-in" onclick="openLightbox(this.querySelector('img'))">
+                            <img src="藥引女子-介紹展版.jpg" class="w-full h-full object-cover" alt="藥引女子介紹展版">
+                        </div>
+                        <div class="md:col-span-5 space-y-10 md:mt-40 text-right">
+                            <div class="relative inline-block">
+                                <div class="absolute -inset-4 bg-white/60 blur-md rounded-3xl"></div>
+                                <img src="藥引女子-封面.JPG" class="w-full rounded-3xl shadow-xl border-[16px] border-white float-card cursor-zoom-in" onclick="openLightbox(this)" alt="藥引女子封面">
+                            </div>
+                            <img src="藥引女子-全景.jpg" class="w-full rounded-3xl shadow-xl border-[16px] border-white float-card cursor-zoom-in" onclick="openLightbox(this)" alt="藥引女子全景">
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center mt-20 text-center">
+                        <div class="md:w-2/5 group">
+                             <img src="藥引女子-局部.JPG" class="w-full rounded-3xl shadow-2xl border-[12px] border-white float-card cursor-zoom-in" onclick="openLightbox(this)" alt="藥引女子局部">
+                             <div class="mt-10 glass-panel inline-block px-8 py-3 rounded-full">
+                                <p class="text-[11px] text-[#809BC4] font-bold tracking-[0.2em] serif uppercase">C2A HONORABLE MENTION</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-24 md:gap-32 mt-40 px-4 md:px-0">
+                <div class="relative group p-10 glass-panel rounded-[2.5rem] border border-white shadow-xl">
+                    <img src="銘傳茶包裝-封面.jpg" class="w-full rounded-2xl shadow-2xl mb-12 float-card cursor-zoom-in" onclick="openLightbox(this)" alt="銘傳茶包裝封面">
+                    <img src="銘傳茶包裝-所有內容.jpg" class="w-full rounded-xl opacity-90 shadow-sm border-2 border-white cursor-zoom-in" onclick="openLightbox(this)" alt="銘傳茶包裝內容">
+                    <h3 class="serif text-3xl mt-10 text-[#809BC4]">銘傳茶包裝</h3>
+                </div>
+                <div class="relative md:mt-48 group p-10 glass-panel rounded-[2.5rem] border border-white text-right shadow-xl">
+                    <img src="udsd logo-封面.jpg" class="w-full rounded-2xl shadow-2xl mb-12 float-card cursor-zoom-in" onclick="openLightbox(this)" alt="UDSD封面">
+                    <img src="udsd logo-1.jpg" class="w-full rounded-xl opacity-90 shadow-sm border-2 border-white cursor-zoom-in" onclick="openLightbox(this)" alt="UDSD內容">
+                    <h3 class="serif text-3xl mt-10 text-[#809BC4]">UDSD 視覺系統</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-40 bg-white relative overflow-hidden px-6 md:px-24">
+        <div class="bg-text serif -bottom-10 left-0 opacity-20 outline-text" style="color: var(--color-blue);">ABOUT RuNi</div>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-12 items-center gap-16 md:gap-24 relative z-10">
+            <div class="md:col-span-5 relative group">
+                <div class="absolute inset-0 bg-[#F5CFE9] blur-xl rounded-[3rem] transform rotate-3 scale-105 opacity-60"></div>
+                <img src="大頭照.jpg" alt="RuRu" class="w-full rounded-[4rem] relative z-10 shadow-2xl border-[24px] border-white cursor-zoom-in" onclick="openLightbox(this)">
+            </div>
+            <div class="md:col-span-7">
+                <div class="w-16 h-[1px] bg-[#F5CFE9] mb-12"></div>
+                <h2 class="text-6xl md:text-[9rem] serif-bold mb-12 leading-none text-[#809BC4]">RuNi.</h2>
+                <p class="text-base md:text-lg leading-loose text-gray-600 mb-16 tracking-[0.2em] font-light max-w-xl">
+                    2003 年生。專注於品牌識別系統與感官體驗規劃。致力於透過設計將傳統文化轉譯為具現代張力的感官語言。
+                </p>
+                
+                <div class="glass-panel p-12 md:p-14 rounded-[3.5rem] grid md:grid-cols-2 gap-10 border border-white shadow-xl">
+                    <div class="border-l-4 border-[#F5CFE9] pl-10">
+                        <p class="text-[#809BC4] text-[10px] serif-bold tracking-[0.5em] uppercase mb-4 italic">Contact Me</p>
+                        <p class="text-sm font-bold tracking-tighter mb-2 lowercase">ruru9212@gmail.com</p>
+                        <p class="text-sm font-bold">0905-670-616</p>
+                    </div>
+                    <div class="border-l-4 border-[#F5CFE9] pl-10 mt-6 md:mt-0 text-right md:text-left">
+                        <p class="text-[#809BC4] text-[10px] serif-bold tracking-[0.5em] uppercase mb-4 italic">Born In</p>
+                        <p class="text-sm font-bold tracking-widest">2003 . 12 . 08</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center bg-white border-t border-gray-100">
+        <p class="text-[10px] text-gray-400 tracking-[0.8em] uppercase font-bold serif">
+            © 2026 RURU DESIGNER. ALL RIGHTS RESERVED.
+        </p>
+    </footer>
+
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+            createParticle(e.clientX, e.clientY);
+        });
+     
+        const interactives = document.querySelectorAll('a, img, button, .cursor-zoom-in');
+        interactives.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('is-hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('is-hovering'));
+        });
+
+        
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.classList.add('cursor-particle');
+            const colors = ['#F5CFE9', '#809BC4', '#B9B0D6'];
+            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 1000);
+        }
+
+        function openLightbox(imgElement) {
+            const targetImg = imgElement.tagName === 'IMG' ? imgElement : imgElement.querySelector('img');
+            if (targetImg) {
+                const overlay = document.getElementById('lightbox-overlay');
+                const lightboxImg = document.getElementById('lightbox-img');
+                lightboxImg.src = targetImg.src;
+                overlay.style.display = 'flex';
+            }
+        }
+
+        function closeLightbox() { 
+            document.getElementById('lightbox-overlay').style.display = 'none'; 
+        }
+        
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Escape') closeLightbox(); 
+        });
+    </script>
+</body>
+</html>
